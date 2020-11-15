@@ -1,9 +1,9 @@
 <div class="mt-2 mb-2 form-row">
   <div class="col-6">
-    <input type="text" placeholder="Введите задание" class="form-control">
+    <input type="text" id="text" #newItemText placeholder="Введите задание" class="form-control">
   </div>
   <div class="col-4">
-    <select class="form-control">
+    <select id="selectCategory" #newItemCategory class="form-control">
       <option selected disabled>
         Выбери категорию
       </option>
@@ -13,13 +13,13 @@
     </select>
   </div>
   <div class="col">
-    <button class="btn btn-success w-100">
+    <button class="btn btn-success w-100" (click)="addItem(newItemText.value, newItemCategory.value)">
       добавить
     </button>
   </div>
 </div>
 <div class="d-flex justify-content-between">
-  <a href="#" (click)="toogleOnlyImportant()" class="text-muted small">
+  <a href="#" (click)="toggleOnlyImportant()" class="text-muted small">
     {{isOnlyImportant() ? 'показать все' : 'показать важные'}}
   </a>
   <a href="#" class="text-danger small" (click)="removeTodoItems()">удалить завершенные</a>
@@ -35,7 +35,7 @@
     [class.task-completed]="item.completed"
   >
     <div class="task-checkbox">
-      <input type="checkbox" [checked]="item.completed" (click)="toogleCompleted(item.id)">
+      <input type="checkbox" [checked]="item.completed" (click)="toggleCompleted(item.id)">
     </div>
     <div class="title">
       {{item.title}}
@@ -43,10 +43,9 @@
     <div class="task-category text-right text-muted small">
       {{item.category}}
     </div>
-    <div class="task-star text-right" (click)="toogleImportant(item.id)">
+    <div class="task-star text-right" (click)="toggleImportant(item.id)">
       <span *ngIf="item.important" class="material-icons">star</span>
       <span *ngIf="!item.important" class="material-icons">star_border</span>
-
     </div>
   </li>
 </ul>

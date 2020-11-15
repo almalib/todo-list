@@ -12,6 +12,12 @@ export class StoreTodosService {
     {id: 5, title: 'Доделать сайт-портфолио', completed: false, category: 'работа', important: false}
   ];
 
+  public addItem(newItem) {
+    if (newItem !== '') {
+
+    }
+  }
+
   selectedCategory = null;
 
   onlyImportant = false;
@@ -20,13 +26,14 @@ export class StoreTodosService {
     return this.onlyImportant;
   }
 
-  toogleOnlyImportant() {
+  toggleOnlyImportant() {
     this.onlyImportant = !this.onlyImportant;
   }
 
   selectCategory(category) {
     this.selectedCategory = category;
   }
+
   getItems() {
     let items;
     if (this.onlyImportant) {
@@ -46,6 +53,7 @@ export class StoreTodosService {
     }
     return items;
   }
+
   removeTodoItems() {
     this.items = this.items.filter(item => !item.completed);
   }
@@ -61,7 +69,7 @@ export class StoreTodosService {
     return categories;
   }
 
-  toogleComplete(id) {
+  toggleComplete(id) {
     this.items = this.items.map(item => {
       if (item.id === id) {
         return {
@@ -72,7 +80,7 @@ export class StoreTodosService {
       return item;
     });
   }
-  toogleImportant(id) {
+  toggleImportant(id) {
     this.items = this.items.map(item => {
       if (item.id === id) {
         return {

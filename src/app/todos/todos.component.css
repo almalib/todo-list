@@ -18,3 +18,9 @@
   text-decoration: line-through;
   opacity: 0.6;
 }
+.error {
+  border-color: red;
+  color: red;
+}
+.error::-webkit-input-placeholder { color: red; }
+

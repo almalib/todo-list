@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {StoreTodosService} from '../store-todos.service';
 
 @Component({
@@ -7,35 +7,64 @@ import {StoreTodosService} from '../store-todos.service';
   styleUrls: ['./todos.component.css']
 })
 export class TodosComponent implements OnInit {
+  /**
+   *
+   */
 
   constructor(
     private storeTodos: StoreTodosService
   ) { }
 
-  toogleCompleted(id) {
-    this.storeTodos.toogleComplete(id);
+  ngOnInit(): void {
   }
 
-  toogleImportant(id) {
-    this.storeTodos.toogleImportant(id);
+  public toggleCompleted(id) {
+    this.storeTodos.toggleComplete(id);
   }
 
-  getItems() {
+  public toggleImportant(id) {
+    this.storeTodos.toggleImportant(id);
+  }
+
+  public getItems() {
     return this.storeTodos.getItems();
   }
 
-  removeTodoItems() {
+  public removeTodoItems() {
     this.storeTodos.removeTodoItems();
   }
-  toogleOnlyImportant() {
-    this.storeTodos.toogleOnlyImportant();
+  public toggleOnlyImportant() {
+    this.storeTodos.toggleOnlyImportant();
   }
 
-  isOnlyImportant() {
+  public isOnlyImportant() {
     return this.storeTodos.onlyImportant;
   }
 
-  ngOnInit(): void {
+  /**
+   *
+   */
+  addItem(newItem, itemCategory) {
+    const selectCategory = document.getElementById('selectCategory');
+    const text = document.getElementById('text');
+    const newId = this.getItems().length + 1;
+    const item = {
+      id: newId,
+      title: newItem,
+      category: itemCategory,
+      completed: false,
+      important: false,
+    };
+    if (newItem !== '' && itemCategory !== 'Выбери категорию') {
+      this.getItems().push(item);
+      selectCategory.classList.remove('error');
+      text.classList.remove('error');
+    }
+    else if (newItem === '' && itemCategory === 'Выбери категорию') {
+      selectCategory.classList.add('error');
+      text.classList.add('error');
+
+    }
   }
 
 }
