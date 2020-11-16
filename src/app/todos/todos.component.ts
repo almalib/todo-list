@@ -7,10 +7,10 @@ import {StoreTodosService} from '../store-todos.service';
   styleUrls: ['./todos.component.css']
 })
 export class TodosComponent implements OnInit {
+
   /**
    *
    */
-
   constructor(
     private storeTodos: StoreTodosService
   ) { }
@@ -44,7 +44,7 @@ export class TodosComponent implements OnInit {
   /**
    *
    */
-  addItem(newItem, itemCategory) {
+  public addItem(newItem, itemCategory) {
     const selectCategory = document.getElementById('selectCategory');
     const text = document.getElementById('text');
     const newId = this.getItems().length + 1;
@@ -60,10 +60,38 @@ export class TodosComponent implements OnInit {
       selectCategory.classList.remove('error');
       text.classList.remove('error');
     }
-    else if (newItem === '' && itemCategory === 'Выбери категорию') {
-      selectCategory.classList.add('error');
+    else if (newItem === '') {
       text.classList.add('error');
 
+    }
+    else if (itemCategory === 'Выбери категорию') {
+      selectCategory.classList.add('error');
+    }
+  }
+
+  /**
+   *
+   * @param input
+   */
+  public inputCheck(input) {
+    const text = document.getElementById('text');
+    if (input === '') {
+      text.classList.add('error');
+    } else {
+      text.classList.remove('error');
+    }
+  }
+
+  /**
+   *
+   * @param category
+   */
+  public categoryCheck(category) {
+    const selectCategory = document.getElementById('selectCategory');
+    if (category === 'Выбери категорию') {
+      selectCategory.classList.add('error');
+    } else {
+      selectCategory.classList.remove('error');
     }
   }
 

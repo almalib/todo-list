@@ -1,9 +1,13 @@
 <div class="mt-2 mb-2 form-row">
   <div class="col-6">
-    <input type="text" id="text" #newItemText placeholder="Введите задание" class="form-control">
+    <input type="text" id="text" #newItemText
+           placeholder="Введите задание"
+           class="form-control"
+           (input)="inputCheck(newItemText.value)"
+    >
   </div>
   <div class="col-4">
-    <select id="selectCategory" #newItemCategory class="form-control">
+    <select id="selectCategory" #newItemCategory class="form-control" (input)="categoryCheck(newItemCategory.value)">
       <option selected disabled>
         Выбери категорию
       </option>
